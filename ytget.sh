@@ -23,11 +23,11 @@ function downloadQueue() {
 
 function rotateQueues() {
   for i in $(seq 4 -1 1) ; do
-    if [ -e $YTGET_DIR/.prev_queue$i.txt ] ; then
-      mv $YTGET_DIR/.prev_queue$i.txt $YTGET_DIR/.prev_queue$(($i+1)).txt
+    if [ -e $YTGET_DIR/prev_queue$i.txt ] ; then
+      mv $YTGET_DIR/prev_queue$i.txt $YTGET_DIR/prev_queue$(($i+1)).txt
     fi
   done
-  mv queue.txt $YTGET_DIR/.prev_queue1.txt
+  mv queue.txt $YTGET_DIR/prev_queue1.txt
   touch queue.txt
 }
 
