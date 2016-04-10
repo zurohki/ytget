@@ -22,13 +22,11 @@ function downloadQueue() {
 }
 
 function rotateQueues() {
-  cd $YTGET_DIR
   for i in $(seq 4 -1 1) ; do
-    if [ -e .prev_queue$i.txt ] ; then
-      mv .prev_queue$i.txt .prev_queue$(($i+1)).txt
+    if [ -e $YTGET_DIR/.prev_queue$i.txt ] ; then
+      mv $YTGET_DIR/.prev_queue$i.txt $YTGET_DIR/.prev_queue$(($i+1)).txt
     fi
   done
-  cd -
   mv queue.txt $YTGET_DIR/.prev_queue1.txt
   touch queue.txt
 }
@@ -43,6 +41,7 @@ while [ -s queue.txt ] ; do
   downloadQueue
   rotateQueues
   if [ -e nextqueue.txt ] ; then
+    echo -e "***\n*** Moving nextqueue.txt ==> queue.txt\n***"
     mv nextqueue.txt queue.txt
   fi
 done
